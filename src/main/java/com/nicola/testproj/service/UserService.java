@@ -4,6 +4,8 @@ import com.nicola.testproj.model.User;
 import com.nicola.testproj.repository.JdbcUserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     private final JdbcUserRepository userRepository;
@@ -22,5 +24,13 @@ public class UserService {
 
     public boolean existsByUsername(String username) {
         return userRepository.existsByUsername(username);
+    }
+
+    public boolean isAdmin(String userId) {
+        return userRepository.isAdmin(userId);
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.getAllUsers();
     }
 }

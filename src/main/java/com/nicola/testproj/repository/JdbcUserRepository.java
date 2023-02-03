@@ -2,6 +2,7 @@ package com.nicola.testproj.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.UUID;
 
 import com.nicola.testproj.dao.UserRepository;
@@ -47,6 +48,17 @@ public class JdbcUserRepository implements UserRepository {
             user.setUsername(rs.getString("username"));
             return user;
         }
+    }
+
+    public List<User> getAllUsers() {
+        return jdbcTemplate.query("SELECT id, username FROM user_info",
+                (rs, rowNum) -> new User(UUID.fromString(rs.getString("id")), rs.getString("username")));
+    }
+
+    public boolean isAdmin(String userId) {
+        String sql = "SELECT COUNT(*) FROM user_info WHERE id = ? and username = 'admin'";
+        int count = jdbcTemplate.queryForObject(sql, new Object[] { userId }, Integer.class);
+        return count > 0;
     }
 }
 

@@ -1,3 +1,6 @@
+INSERT INTO user_info (id, username)
+VALUES ('3f38ead7-7e43-4339-92a0-43408b6d5eb2', 'admin');
+
 INSERT INTO questions (id, text, type)
 VALUES (0,'What is the purpose of a debugger in software development?', 'CHOICE');
 
