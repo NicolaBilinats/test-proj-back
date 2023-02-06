@@ -2,7 +2,9 @@ package com.nicola.testproj.controller;
 
 import com.nicola.testproj.model.User;
 import com.nicola.testproj.service.UserService;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +13,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
+@OpenAPIDefinition(
+        info = @Info(
+                title = "User API",
+                version = "1.0",
+                description = "Operations for managing users"
+        )
+)
 public class UserController {
     private final UserService userService;
 
@@ -18,8 +27,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    @ApiOperation(value = "Add a new User", response = User.class)
     @PostMapping("/register")
+    @Operation(summary = "Create new user", description = "Create new user in the database.")
     public ResponseEntity<User> register(@RequestBody User user) {
         if (userService.existsByUsername(user.getUsername())) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -27,7 +36,6 @@ public class UserController {
         userService.registerUser(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
-    @ApiOperation(value = "Login and get userId", response = User.class)
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody User user) {
         if (!userService.existsByUsername(user.getUsername())) {
@@ -42,7 +50,7 @@ public class UserController {
         }
     }
 
-    @ApiOperation(value = "Get all Users", response = User.class, responseContainer = "List")
+    @Operation(summary = "Get all users", description = "Retrieve all users from the database.")
     @GetMapping("/all")
     public ResponseEntity<List<User>> getAllUsers(@RequestHeader("userId") String userId) {
         if (!userService.isAdmin(userId)) {
