@@ -13,7 +13,6 @@ import com.nicola.testproj.model.User;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -132,8 +131,6 @@ public class JdbcUserRepository implements UserRepository {
             return (double) correctAnswersCount / totalAnswersCount * 100;
         });
     }
-
-
 
     public boolean isAdmin(String userId) {
         String sql = "SELECT COUNT(*) FROM user_info WHERE id = ? and username = 'admin'";

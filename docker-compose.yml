@@ -10,9 +10,3 @@ services:
       - SPRING_DATASOURCE_PASSWORD=sa
     volumes:
       - .:/app
-  h2:
-    image: "h2:alpine"
-    ports:
-      - "8082:8082"
-    environment:
-      - H2_OPTIONS=-webAllowOthers

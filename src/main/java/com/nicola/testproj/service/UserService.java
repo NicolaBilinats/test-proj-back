@@ -5,7 +5,6 @@ import com.nicola.testproj.repository.JdbcUserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class UserService {

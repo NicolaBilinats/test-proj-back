@@ -50,7 +50,6 @@ public class JdbcQuestionRepository implements QuestionRepository {
         });
     }
 
-
     private static class QuestionRowMapper implements RowMapper<Question> {
         @Override
         public Question mapRow(ResultSet rs, int rowNum) throws SQLException {

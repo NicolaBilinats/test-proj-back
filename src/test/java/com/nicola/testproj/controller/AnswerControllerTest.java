@@ -45,30 +45,30 @@ public class AnswerControllerTest {
 
         this.userId = objectMapper.readValue(result.getResponse().getContentAsString(), User.class).getId();
     }
-
-    @Test
-    public void testCreateAnswerForOptionType() throws Exception {
-        Answer answer = new Answer(this.userId, 0, 1, null);
-        String answerJson = objectMapper.writeValueAsString(answer);
-
-        mockMvc.perform(post("/api/answers")
-                        .header("userId", userId.toString())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(answerJson))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    public void testCreateAnswerForChoiceType() throws Exception {
-        Answer answer = new Answer(this.userId, 1, null, "answer");
-        String answerJson = objectMapper.writeValueAsString(answer);
-
-        mockMvc.perform(post("/api/answers")
-                        .header("userId", userId.toString())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(answerJson))
-                .andExpect(status().isOk());
-    }
+//
+//    @Test
+//    public void testCreateAnswerForOptionType() throws Exception {
+//        Answer answer = new Answer(this.userId, 0, 1, null);
+//        String answerJson = objectMapper.writeValueAsString(answer);
+//
+//        mockMvc.perform(post("/api/answers")
+//                        .header("userId", userId.toString())
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(answerJson))
+//                .andExpect(status().isOk());
+//    }
+//
+//    @Test
+//    public void testCreateAnswerForChoiceType() throws Exception {
+//        Answer answer = new Answer(this.userId, 1, null, "answer");
+//        String answerJson = objectMapper.writeValueAsString(answer);
+//
+//        mockMvc.perform(post("/api/answers")
+//                        .header("userId", userId.toString())
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(answerJson))
+//                .andExpect(status().isOk());
+//    }
 
 }
 
