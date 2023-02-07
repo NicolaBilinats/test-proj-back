@@ -13,8 +13,8 @@ public class AnswerService {
     @Autowired
     private JdbcAnswerRepository jdbcAnswerRepository;
 
-    public void addAnswer(Answer answer) {
-        jdbcAnswerRepository.saveAnswer(answer);
+    public void addAnswer(String userId, Answer answer) {
+        jdbcAnswerRepository.saveAnswer(userId, answer);
     }
 
     public List<Answer> getAnswersByUserId(String userId) {

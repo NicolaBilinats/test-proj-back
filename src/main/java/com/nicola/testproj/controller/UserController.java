@@ -5,6 +5,8 @@ import com.nicola.testproj.service.UserService;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +17,7 @@ import java.util.List;
 @RequestMapping("/api/users")
 @OpenAPIDefinition(
         info = @Info(
-                title = "User API",
+                title = "Users API",
                 version = "1.0",
                 description = "Operations for managing users"
         )
@@ -50,7 +52,11 @@ public class UserController {
         }
     }
 
-    @Operation(summary = "Get all users", description = "Retrieve all users from the database.")
+    @Operation(summary = "Get all users")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful retrieval of user list"),
+            @ApiResponse(responseCode = "404", description = "Users not found")
+    })
     @GetMapping("/all")
     public ResponseEntity<List<User>> getAllUsers(@RequestHeader("userId") String userId) {
         if (!userService.isAdmin(userId)) {
@@ -58,6 +64,30 @@ public class UserController {
         }
         List<User> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
+    }
+
+    @GetMapping("/count_users_with_answers")
+    public ResponseEntity<Integer> getCountUsersWithAnswers(@RequestHeader("userId") String userId) {
+        if (!userService.isAdmin(userId)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+        return ResponseEntity.ok(userService.getCountUsersWithAnswers());
+    }
+
+    @GetMapping("/count_users_with_all_answers")
+    public ResponseEntity<Integer> getCountUsersWithAllAnswers(@RequestHeader("userId") String userId) {
+        if (!userService.isAdmin(userId)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+        return ResponseEntity.ok(userService.getCountUsersWithAllAnswers());
+    }
+
+    @GetMapping("/count_users_with_all_correct_answers")
+    public ResponseEntity<Integer> getCountUsersWithAllCorrectAnswers(@RequestHeader("userId") String userId) {
+        if (!userService.isAdmin(userId)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+        return ResponseEntity.ok(userService.getCountUsersWithAllCorrectAnswers());
     }
 
 }

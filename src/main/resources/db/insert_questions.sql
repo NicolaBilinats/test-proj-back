@@ -6,8 +6,7 @@ VALUES (0,'What is the purpose of a debugger in software development?', 'CHOICE'
 
 INSERT INTO options_answer (question_id, text, is_correct)
 VALUES (0, 'To fix errors in code', true),
-       (0
-       , 'To improve performance', false),
+       (0, 'To improve performance', false),
        (0, 'To write code', false),
        (0, 'To visualize data', false);
 
@@ -29,3 +28,16 @@ VALUES (3, 'He didn''t get arrays', true),
        (3, 'He preferred to work for a living', false),
        (3, 'He didn''t like debuggers', false),
        (3, 'He was tired of fighting with the computer', false);
+
+INSERT INTO questions (id, text, type)
+VALUES (4,'There is a class that is not inherited from the class Object?', 'CHOICE');
+
+INSERT INTO free_answer (question_id, answer)
+VALUES (1,'a closure is a programming technique that allows variables outside of the scope of a function to be accessed');
+
+INSERT INTO free_answer (question_id, answer)
+VALUES (2,'to give the user ability to change the behavior of the libraries, without actually changing already working and debugged code');
+
+INSERT INTO free_answer (question_id, answer)
+VALUES (4,'no');
+

@@ -18,8 +18,8 @@ public class AnswerController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createAnswer(@RequestBody Answer answer) {
-        answerService.addAnswer(answer);
+    public ResponseEntity<Void> createAnswer(@RequestHeader("userId") String userId, @RequestBody Answer answer) {
+        answerService.addAnswer(userId, answer);
         return ResponseEntity.ok().build();
     }
 

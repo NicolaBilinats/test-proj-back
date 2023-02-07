@@ -33,4 +33,16 @@ public class UserService {
     public List<User> getAllUsers() {
         return userRepository.getAllUsers();
     }
+
+    public Integer getCountUsersWithAnswers() {
+        return userRepository.getCountUsersWithAnswers();
+    }
+
+    public Integer getCountUsersWithAllAnswers() {
+        return userRepository.getCountUsersWithAllAnswers();
+    }
+
+    public Integer getCountUsersWithAllCorrectAnswers() {
+        return userRepository.getCountUsersWithCorrectAnswers();
+    }
 }

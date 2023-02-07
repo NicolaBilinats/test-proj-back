@@ -6,6 +6,6 @@ import com.nicola.testproj.model.Question;
 import java.util.List;
 
 public interface AnswerRepository {
-    void saveAnswer(Answer answer);
+    void saveAnswer(String userId, Answer answer);
     List<Answer> findAnswersByUserId(String userId);
 }
