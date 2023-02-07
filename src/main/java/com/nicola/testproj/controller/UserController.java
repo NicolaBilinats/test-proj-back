@@ -90,4 +90,9 @@ public class UserController {
         return ResponseEntity.ok(userService.getCountUsersWithAllCorrectAnswers());
     }
 
+    @GetMapping("/percent_correct_answer_by_user")
+    public ResponseEntity<Double> getPercentCorrectAnswersByUser(@RequestHeader("userId") String userId) {
+        return ResponseEntity.ok(userService.getPercentOfCorrectAnswersByUser(userId));
+    }
+
 }

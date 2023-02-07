@@ -23,8 +23,8 @@ public class QuestionController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Question> getQuestionWithOptions(@PathVariable int questionId) {
-        Question question = questionService.getQuestion(questionId);
+    public ResponseEntity<Question> getQuestionWithOptions(@PathVariable int id) {
+        Question question = questionService.getQuestion(id);
         if (question == null) {
             return ResponseEntity.notFound().build();
         }

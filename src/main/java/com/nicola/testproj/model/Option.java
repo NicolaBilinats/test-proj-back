@@ -13,5 +13,4 @@ public class Option {
     private int id;
     private int questionId;
     private String text;
-    private boolean isCorrect;
 }

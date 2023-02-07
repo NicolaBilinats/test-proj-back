@@ -28,22 +28,22 @@ public class JdbcQuestionRepository implements QuestionRepository {
     }
 
     public Question getQuestionWithOptions(int questionId) {
-        String sql = "SELECT * FROM questions q LEFT JOIN options_answer oa ON q.id = oa.question_id WHERE q.id = ?";
-        return jdbcTemplate.query(sql, new Object[] {questionId}, rs -> {
+        String sql = "SELECT q.id as q_id, q.text as q_text, q.type as q_type, " +
+                "oa.id as oa_id, oa.question_id as oa_question_id, oa.text as oa_text FROM questions q LEFT JOIN options_answer oa ON q.id = oa.question_id WHERE q.id = ?";
+        return jdbcTemplate.query(sql, new Object[]{questionId}, rs -> {
             Question question = null;
             while (rs.next()) {
                 if (question == null) {
                     question = new Question();
-                    question.setId(rs.getInt("id"));
-                    question.setText(rs.getString("text"));
-                    question.setType(QuestionType.valueOf(rs.getString("type")));
+                    question.setId(rs.getInt("q_id"));
+                    question.setText(rs.getString("q_text"));
+                    question.setType(QuestionType.valueOf(rs.getString("q_type")));
                     question.setOptions(new ArrayList<Option>());
                 }
                 Option option = new Option();
-                option.setId(rs.getInt("id"));
-                option.setQuestionId(rs.getInt("question_id"));
-                option.setText(rs.getString("text"));
-                option.setCorrect(rs.getBoolean("is_correct"));
+                option.setId(rs.getInt("oa_id"));
+                option.setQuestionId(rs.getInt("oa_question_id"));
+                option.setText(rs.getString("oa_text"));
                 question.getOptions().add(option);
             }
             return question;
