@@ -1,10 +1,8 @@
-FROM eclipse-temurin:17-jdk-jammy as builder
+FROM maven:3.8.3-openjdk-17 as builder
 WORKDIR /opt/app
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
-RUN ./mvnw dependency:go-offline
+COPY pom.xml ./
 COPY ./src ./src
-RUN ./mvnw clean install
+RUN mvn clean install
 
 FROM eclipse-temurin:17-jre-jammy
 WORKDIR /opt/app
